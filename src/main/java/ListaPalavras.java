@@ -10,8 +10,11 @@ public class ListaPalavras {
 
         for (String palavra : partes) {
 
-            if (!palavra.isEmpty()) {
-                palavras.add(palavra);
+            if (!palavra.trim().isEmpty()) {
+                String palavraLimpa = palavra.replaceAll("[^\\p{L}0-9]", "");
+                if (!palavraLimpa.isEmpty()) {
+                    palavras.add(palavraLimpa);
+                }
             }
 
         }

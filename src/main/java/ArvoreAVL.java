@@ -113,4 +113,25 @@ public class ArvoreAVL {
 
         return y;
     }
+
+    public void computarHash(NoAVL no) {
+        if (no == null) return;
+        
+        computarHash(no.esquerda);
+        computarHash(no.direita);
+        
+        String combinacao = "";
+        if (no.esquerda != null && no.esquerda.hash != null) {
+            combinacao += no.esquerda.hash;
+        }
+        if (no.direita != null && no.direita.hash != null) {
+            combinacao += no.direita.hash;
+        }
+        
+        // Hash_Pai = SHA-1( combinacao_filhos + SHA-1(valor_propriamente_dito) )
+        String hashProprio = HashUtil.gerarSHA1(no.valor);
+        combinacao += hashProprio;
+        
+        no.hash = HashUtil.gerarSHA1(combinacao);
+    }
 }
